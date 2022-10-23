@@ -89,14 +89,14 @@ const NavbarAdmin = () => {
             Reported accounts
           </Link>
         </Typography>
-        <Typography sx={link} variant='body1' component='li'>
+        {/* <Typography sx={link} variant='body1' component='li'>
           <Link
             style={{ display: "flex", color: "white", textDecoration: "none" }}
             to='/admin/generate-reports'>
             <Book sx={{ color: "lightgreen", margin: "0rem 0.5rem" }} />
             Generate Reports
           </Link>
-        </Typography>
+        </Typography> */}
         {/* <Typography sx={link} variant='body1' component='li'>
           <Link
             style={{ display: "flex", color: "white", textDecoration: "none" }}

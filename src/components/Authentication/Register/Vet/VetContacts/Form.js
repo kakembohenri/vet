@@ -12,10 +12,11 @@ import {
   PhoneAndroidSharp,
 } from "@mui/icons-material";
 import { socialItem, form } from "./styles";
+import { setAlert } from "../../../../../actions/alert";
 
 const Form = () => {
   const { user } = useSelector((state) => state.auth);
-  const {id} = useSelector(state => state.auth)
+  const { id } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -27,8 +28,6 @@ const Form = () => {
     linkedin: "",
   });
 
-console.log("id :", id)
-console.log("user: ", user)
   const { phone_number, facebook, twitter, instagram, whatsapp, linkedin } =
     formData;
 
@@ -39,7 +38,13 @@ console.log("user: ", user)
   const onSubmit = (e) => {
     e.preventDefault();
     let newFormData = { id, ...user, contacts: { ...formData } };
-    dispatch(addvetcontacts(newFormData, navigate));
+
+    if (user?.profile_pic !== "") {
+      dispatch(addvetcontacts(newFormData, navigate));
+    } else {
+      dispatch(setAlert("Profile pic not set"));
+      navigate("/create-profile/personal-details/vet");
+    }
   };
   return (
     <form style={form} onSubmit={onSubmit}>
@@ -123,7 +128,7 @@ console.log("user: ", user)
             color: "white",
             margin: "0rem 0.8rem",
           }}
-          onClick={() => navigate("/profile/vet-contacts")}>
+          onClick={() => navigate("/create-profile/personal-details/vet")}>
           Back
         </Button>
         <Button

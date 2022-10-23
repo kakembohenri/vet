@@ -17,3 +17,8 @@ export const reports = {
   margin: "4rem 0rem",
   width: "60%",
 };
+
+export const iconBox = {
+  margin: "0rem 1rem",
+  textAlign: "center",
+};

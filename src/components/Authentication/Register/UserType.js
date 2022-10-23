@@ -33,9 +33,8 @@ const UserType = () => {
             elevation={5}
             onClick={() => navigate("/register-farmer")}>
             <img style={userImg} src={farmer} alt='farmer' />
-            <Typography variant='subtitle1' component='p'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Temporibus, excepturi.
+            <Typography variant='subtitle1' sx={{ textAlign: 'center' }} component='p'>
+             Farmer
             </Typography>
           </Paper>
           <Paper
@@ -44,9 +43,8 @@ const UserType = () => {
             onClick={() => navigate("/register-vet")}
             elevation={5}>
             <img style={userImg} src={vet} alt='vet' />
-            <Typography variant='subtitle1' component='p'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Temporibus, excepturi.
+            <Typography variant='subtitle1' sx={{ textAlign: 'center' }} component='p'>
+              Vet
             </Typography>
           </Paper>
         </div>

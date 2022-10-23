@@ -24,6 +24,7 @@ import {
   EDIT_PROFILE_FARMER,
   EDIT_PROFILE_VET,
   FETCH_VETS,
+  FETCH_SERVICES,
 } from "../types";
 
 let initialState = {
@@ -47,7 +48,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         user: payload.result,
         profile: payload.result,
-        isSuspended: payload.isSuspended
+        isSuspended: payload.isSuspended,
       };
     case EDIT_PROFILE_FARMER:
     case EDIT_PROFILE_VET:
@@ -63,8 +64,7 @@ const authReducer = (state = initialState, action) => {
         profile: payload.result,
         notifications: payload.notifications,
         reviews: payload.reviews,
-        isSuspended: payload.isSuspended
-
+        isSuspended: payload.isSuspended,
       };
     case GET_VET_PROFILE:
       return {
@@ -83,13 +83,16 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
+        farmer: payload.result,
       };
     case VERIFY_CODE:
-      return { ...state, user: payload.result };
+      return { ...state, id: payload.result };
     case SEND_CODE:
       return state;
     case CREATE_PROFILE_FARMER:
-      return { ...state, user: payload.result };
+      localStorage.setItem("user", payload.token);
+
+      return { ...state, user: payload.result, profile: payload.result };
     case CREATE_PROFILE_VET:
       return { ...state, user: payload };
     case SIGNUP_VET:
@@ -99,10 +102,11 @@ const authReducer = (state = initialState, action) => {
       return { ...state, id: payload.result };
     case ADD_PROFILE_CONTACTS:
       localStorage.setItem("user", payload.token);
-      return { ...state, 
+      return {
+        ...state,
         isAuthenticated: true,
         user: payload.result,
-        profile: payload.result 
+        profile: payload.result,
       };
     case CREATE_SCHEDULE:
       return {
@@ -151,11 +155,15 @@ const authReducer = (state = initialState, action) => {
         ],
       };
     case FETCH_VETS:
-      console.log('Result: ', payload)
       return {
         ...state,
-        vets: payload
-      }
+        vets: payload,
+      };
+    case FETCH_SERVICES:
+      return {
+        ...state,
+        services: payload.result,
+      };
     default:
       return state;
   }

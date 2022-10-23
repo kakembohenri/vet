@@ -9,7 +9,6 @@ import VetContacts from "./components/Authentication/Register/Vet/VetContacts/Ve
 import Profile from "./components/Profile/Profile";
 import EditFarmer from "./components/Profile/EditFarmer";
 import EditVet from "./components/Profile/EditVet";
-import Home from "./components/Home/Home";
 import Index from "./components/Schedule/Index";
 import CreateSchedule from "./components/Schedule/CreateSchedule";
 import Edit from "./components/Schedule/Edit";
@@ -31,9 +30,14 @@ import PersonalDetails from "./components/Authentication/Register/Farmer/Persona
 import "./App.css";
 
 // Categories
-import Plants from "./components/Home/Categories/Plants";
-import Poultry from "./components/Home/Categories/Poultry";
-import Cattle from "./components/Home/Categories/Cattle";
+import Categories from "./components/Categories/Categories";
+
+// Table
+import VetsTable from "./components/Admin/Reports/Tables/VetsTable";
+import FarmersTable from "./components/Admin/Reports/Tables/FarmersTable";
+import UsersTable from "./components/Admin/Reports/Tables/FarmersTable";
+import AppointmentsTable from "./components/Admin/Reports/Tables/AppointmentsTable";
+import CompleteTable from "./components/Admin/Reports/Tables/Complete";
 
 const App = () => {
   return (
@@ -45,7 +49,7 @@ const App = () => {
         <Route exact path='/verify-email' element={<VerifyEmail />} />
         <Route
           exact
-          path='/vet/confirm/:email/:code/:id'
+          path='/vet/confirm/:email/:code'
           element={<ConfirmEmail />}
         />
         <Route
@@ -65,10 +69,6 @@ const App = () => {
         <Route exact path='/profile/:id' element={<Profile />} />
         <Route exact path='/profile/farmer/edit/:id' element={<EditFarmer />} />
         <Route exact path='/profile/vet/edit/:id' element={<EditVet />} />
-        <Route exact path='/home' element={<Home />} />
-        <Route exact path='/home/categories/plants' element={<Plants />} />
-        <Route exact path='/home/categories/poultry' element={<Poultry />} />
-        <Route exact path='/home/categories/cattle' element={<Cattle />} />
         <Route exact path='/schedule' element={<Index />} />
         <Route exact path='/create/schedule' element={<CreateSchedule />} />
         <Route exact path='/edit/schedule/:id' element={<Edit />} />
@@ -77,11 +77,32 @@ const App = () => {
           path='/rate/experience-with/:id/:notification'
           element={<Review />}
         />
+
+        {/* Categories */}
+        <Route exact path='/category/:name/:service' element={<Categories />} />
+
         <Route exact path='/admin/dashboard' element={<Dashboard />} />
         <Route exact path='/admin/manage/admins' element={<Admin />} />
         <Route exact path='/admin/manage/vets' element={<User />} />
         <Route exact path='/admin/add' element={<AddAdmin />} />
         <Route exact path='/admin/reports' element={<Reports />} />
+
+        {/* Tables */}
+        <Route
+          exact
+          path='/admin/reports/appointments'
+          element={<AppointmentsTable />}
+        />
+        <Route exact path='/admin/reports/vets' element={<VetsTable />} />
+        <Route exact path='/admin/reports/users' element={<UsersTable />} />
+        <Route exact path='/admin/reports/farmers' element={<FarmersTable />} />
+        <Route
+          exact
+          path='/admin/reports/complete'
+          element={<CompleteTable />}
+        />
+        {/* Tables */}
+
         <Route exact path='/admin/generate-reports' element={<Generate />} />
         <Route exact path='/admin/reports/:id' element={<Investigate />} />
         <Route exact path='/admin/suspended' element={<Suspended />} />

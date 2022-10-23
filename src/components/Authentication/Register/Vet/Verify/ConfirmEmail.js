@@ -5,8 +5,8 @@ import { confirmemail } from "../../../../../actions/auth";
 const ConfirmEmail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { email, code, id } = useParams();
-  dispatch(confirmemail(email, code, id, navigate));
+  const { email, code } = useParams();
+  dispatch(confirmemail(email, code, navigate));
 
   return <div>Verifying your email address...</div>;
 };

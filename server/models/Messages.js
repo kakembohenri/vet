@@ -16,7 +16,7 @@ const schema = mongoose.Schema({
   },
   dateSent: {
     type: Date,
-    default: Date.now(),
+    default: new Date,
   },
 });
 

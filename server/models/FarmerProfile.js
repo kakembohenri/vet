@@ -5,19 +5,6 @@ const schema = mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Users",
   },
-  // names: {
-  //   first_name: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   surname: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   other_name: {
-  //     type: String,
-  //   },
-  // },
   name: {
     type: [String],
   },
@@ -45,6 +32,13 @@ const schema = mongoose.Schema({
   bio: {
     type: String,
     required: true,
+  },
+  profile_pic: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
   },
 });
 

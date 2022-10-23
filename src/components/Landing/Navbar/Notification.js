@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { Notifications } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { markasread } from "../../../actions/profile";
-import moment from "moment";
+// import moment from "moment";
 import { linkItem, noti } from "./styles";
 
 const Notification = ({ user }) => {
@@ -64,7 +64,7 @@ const Notification = ({ user }) => {
                       <span key={index}>{item} </span>
                     ))}
                   </Typography>
-                  <Typography>{moment(item.createdAt).fromNow()}</Typography>
+                  <Typography>{""}</Typography>
                 </div>
                 <Typography
                   key={index}

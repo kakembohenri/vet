@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { AppBar, Typography, Button, Paper } from "@mui/material";
-import { Person, Inbox, Logout, Schedule, Settings, SearchSharp } from "@mui/icons-material";
+import { Person, Inbox, Logout, Schedule, Settings } from "@mui/icons-material";
 import {
   navbar,
   iconBox,
@@ -15,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../../actions/profile";
 
 const Navbar = ({ user }) => {
- 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -27,26 +26,14 @@ const Navbar = ({ user }) => {
   return (
     <AppBar style={navbar}>
       <div style={iconBox}>
-          <Typography color='black' fontWeight={700} variant='h4' component='p'>
-            <small style={{ color: "lightgreen" }}>i</small>V
-            <span style={{ color: "lightgreen" }}>e</span>t
-          </Typography>
+        <Typography color='black' fontWeight={700} variant='h4' component='p'>
+          <small style={{ color: "lightgreen" }}>i</small>V
+          <span style={{ color: "lightgreen" }}>e</span>t
+        </Typography>
       </div>
       <div style={user?.isAuthenticated ? loggedIn : linkContainer}>
-      {user?.isAuthenticated && (
         <Typography style={linkItem} variant='body1' component='li'>
-            <Link
-              style={link}
-              className='icon-name'
-              title='Search for services'
-              to='/home'>
-          <SearchSharp />
-              
-            </Link>
-        </Typography>
-      )}
-        <Typography style={linkItem} variant='body1' component='li'>
-          {user?.isAuthenticated ? (
+          {user?.isAuthenticated && (
             <Link
               style={link}
               className='icon-name'
@@ -58,14 +45,15 @@ const Navbar = ({ user }) => {
               }>
               <Person />
             </Link>
-          ) : (
+          )}
+          {/* : (
             <a style={link} href='#home'>
               Home
             </a>
-          )}
+          )} */}
         </Typography>
         <Typography style={linkItem} variant='body1' component='li'>
-          {user?.isAuthenticated ? (
+          {user?.isAuthenticated && (
             <Link
               style={link}
               to={
@@ -77,26 +65,24 @@ const Navbar = ({ user }) => {
               title='Inbox'>
               <Inbox />
             </Link>
-          ) : (
-            <>
-            <a style={link} href='#about'>
-              About
-            </a>
-            
-            
-            </>
           )}
+          {/* : (
+            <>
+              <a style={link} href='#about'>
+                About
+              </a>
+            </>
+          )} */}
         </Typography>
-        {!user?.isAuthenticated && (
-        <Typography style={linkItem} variant='body1' component='li'>
+        {/* {!user?.isAuthenticated && (
+          <Typography style={linkItem} variant='body1' component='li'>
             <a style={link} href='#vets'>
               Vets
             </a>
-        </Typography>
-
-        )}
+          </Typography>
+        )} */}
         <Typography style={linkItem} variant='body1' component='li'>
-          {user?.isAuthenticated ? (
+          {user?.isAuthenticated && (
             <a
               style={link}
               className='icon-name'
@@ -104,20 +90,21 @@ const Navbar = ({ user }) => {
               href='/schedule'>
               <Schedule />
             </a>
-          ) : (
-            <a style={link} href='#features'>
-              Features
-            </a>
           )}
+          {/* // : (
+          //   <a style={link} href='#features'>
+          //     Features
+          //   </a>
+          // )} */}
         </Typography>
         {user?.isAuthenticated && <Notification user={user} />}
-        <Typography style={linkItem} variant='body1' component='li'>
+        {/* <Typography style={linkItem} variant='body1' component='li'>
           {!user?.isAuthenticated && (
             <a style={link} href='#contact'>
               Contact
             </a>
           )}
-        </Typography>
+        </Typography> */}
         {user?.isAuthenticated && (
           <Typography
             style={linkItem}

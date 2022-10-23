@@ -12,6 +12,7 @@ import {
   FETCH_DASHBOARD,
   SIGN_OUT,
   FETCH_VETS,
+  FETCH_SERVICES,
 } from "../types";
 import * as api from "../api/index";
 import { setAlert } from "./alert";
@@ -37,7 +38,7 @@ export const login = (formData, navigate) => async (dispatch) => {
       navigate("/admin/dashboard");
     }
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     dispatch(setAlert(error.response.data.msg, "error"));
   }
 };
@@ -50,43 +51,49 @@ export const signupfarmer = (formData, navigate) => async (dispatch) => {
       type: SIGNUP_FARMER,
       payload: data,
     });
+    dispatch(setAlert(data.msg, "success"));
 
     navigate("/verify-farmer");
   } catch (error) {
+
+    dispatch(setAlert(error.response.data.msg, 'error'))
     console.log(error);
   }
 };
 
 // Send code
 export const sendcode = (formData, navigate) => async (dispatch) => {
-  let code = Math.floor(Math.random() * 1000000);
-  let phone_number = formData.phone_number;
-
   try {
-    const { data } = await api.sendCode(phone_number, code);
+    const { data } = await api.sendCode(formData);
 
     dispatch({
       type: SEND_CODE,
       payload: data,
     });
+
+    dispatch(setAlert(data.msg, "success"));
+    navigate("/verify-farmer");
   } catch (error) {
     console.log(error);
+    dispatch(setAlert("Server Error", "error"));
   }
 };
 
 // Verify code
-export const verifycode = (code, navigate) => async (dispatch) => {
+export const verifycode = (formData, navigate) => async (dispatch) => {
   try {
-    const { data } = await api.verifyCode(code);
+    const { data } = await api.verifyCode(formData);
 
     dispatch({
       type: VERIFY_CODE,
       payload: data,
     });
 
+    dispatch(setAlert("Proceed with creating your account", "success"));
     navigate("/create-profile/personal-details/farmer");
   } catch (error) {
     console.log(error);
+    dispatch(setAlert(error.response.data.msg, "error"));
   }
 };
 
@@ -100,8 +107,8 @@ export const createfarmerprofile = (formData, navigate) => async (dispatch) => {
       payload: data,
     });
 
-
-    // navigate("/profile");
+    dispatch(setAlert(data.msg, "success"));
+    navigate(`/profile/${data.id}`);
   } catch (error) {
     console.log(error);
   }
@@ -140,15 +147,18 @@ export const signupvet = (formData, navigate) => async (dispatch) => {
 };
 
 // Confirm email
-export const confirmemail = (email, code, id, navigate) => async (dispatch) => {
+export const confirmemail = (email, code, navigate) => async (dispatch) => {
   try {
-    const { data } = await api.confirmEmail(email, code, id);
+    const { data } = await api.confirmEmail(email, code);
 
     dispatch({
       type: CONFIRM_EMAIL,
       payload: data,
     });
 
+    // console.log(data);
+
+    dispatch(setAlert(data.msg, "success"));
     navigate("/create-profile/personal-details/vet");
   } catch (error) {
     console.log(error);
@@ -164,7 +174,9 @@ export const addvetcontacts = (newFormData, navigate) => async (dispatch) => {
       type: ADD_PROFILE_CONTACTS,
       payload: data,
     });
-     navigate(`/profile/${data.id}`);
+
+    dispatch(setAlert(data.msg, "success"));
+    navigate(`/profile/${data.id}`);
   } catch (error) {
     console.log(error);
   }
@@ -212,16 +224,28 @@ export const logout = (navigate) => async (dispatch) => {
 };
 
 // Fetch vets
-export const fetchvets = () => async(dispatch) =>{
+export const fetchvets = () => async (dispatch) => {
   try {
-    const {data} = await api.fetchVets()
+    const { data } = await api.fetchVets();
 
     dispatch({
       type: FETCH_VETS,
-      payload: data
-    })
-    
+      payload: data,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
+// Fetch vets by services
+export const fetchservices = (name) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchServices(name);
+
+    dispatch({
+      type: FETCH_SERVICES,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,28 +1,16 @@
 export const container = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  margin: "6rem 0rem",
-  // width: '100vw',
-  height: "100vh",
-};
+  position: 'fixed',
+  height: '100vh',
+  width: '100vw'
+}
 
-export const header = {
-  margin: "3rem 0rem",
-  borderBottom: "0.8rem solid green",
-  paddingBottom: "0.3rem",
-  width: "fit-content",
-};
-
-export const features = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "80%",
-};
-
-export const featureItem = {
-  width: "25%",
-  padding: "0.8rem",
-};
+export const backdrop = {
+  position: 'fixed',
+  background: 'black',
+  opacity: '0.5',
+  width: '100%',
+  height: '100%',
+  zIndex: '100',
+  top: '0',
+  transition: '0.8s ease-in-out'
+}

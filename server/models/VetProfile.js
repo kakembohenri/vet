@@ -5,23 +5,12 @@ const schema = mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Users",
   },
-  // names: {
-  //   first_name: {
-  //     type: String,
-  //   },
-  //   surname: {
-  //     type: String,
-  //   },
-  //   other_name: {
-  //     type: String,
-  //   },
-  // },
   name: {
     type: [String],
   },
   rating: {
     type: Number,
-    default: 0
+    default: 0,
   },
   clinic: {
     type: String,
@@ -42,7 +31,7 @@ const schema = mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: false
+    default: false,
   },
   services: {
     type: [String],
@@ -76,24 +65,10 @@ const schema = mongoose.Schema({
       type: String,
     },
   },
-  // reviews: [
-  //   {
-  //     user: {
-  //       type: mongoose.SchemaTypes.ObjectId,
-  //       ref: "FarmerProfile",
-  //     },
-  //     text: {
-  //       type: String,
-  //     },
-  //     rating: {
-  //       type: Number,
-  //     },
-  //   },
-  // ],
   createdAt: {
     type: Date,
-    default: Date.now()
-  }
+    default: new Date(),
+  },
 });
 
 module.exports = VetProfile = mongoose.model("VetProfile", schema);

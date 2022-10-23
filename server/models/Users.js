@@ -25,7 +25,7 @@ const schema = mongoose.Schema({
   },
   dateJoined: {
     type: Date,
-    default: Date.now(),
+    default: new Date,
   },
 });
 

@@ -103,12 +103,12 @@ const profileReducer = (state = initialState, action) => {
     case GET_REPORTS:
       return {
         ...state,
-        reports: [...state.reports, payload.result],
+        reports: payload.result
       };
     case INVESTIGATE:
       return {
         ...state,
-        userReports: [...state.userReports, payload.result],
+        userReports: payload.result,
       };
     case SUSPENDED_USERS:
       return {

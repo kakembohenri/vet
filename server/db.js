@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  let uri = "mongodb://localhost:27017/ivet";
+  let uri = "mongodb://127.0.0.1:27017/ivet";
 
   try {
     await mongoose.connect(uri);

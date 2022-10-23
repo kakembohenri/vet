@@ -8,7 +8,7 @@ import { header, headerContainer } from "./styles";
 
 const Reports = () => {
   const { reports } = useSelector((state) => state.profile);
-  const profile = useSelector(state => state.profile)
+  // const profile = useSelector(state => state.profile)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [reportsArr, setReportsArr] = useState(null);
@@ -23,6 +23,8 @@ const Reports = () => {
 
     setReportsArr(final);
   }, [reports]);
+
+  // console.log(reports)
 
   return (
     <div>

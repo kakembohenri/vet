@@ -34,7 +34,7 @@ import {
   sendmessage,
   getallchats,
 } from "../../actions/profile";
-import moment from "moment";
+// import moment from "moment";
 
 const Chat = () => {
   const auth = useSelector((state) => state.auth);
@@ -114,7 +114,7 @@ const Chat = () => {
       <Grid container component={Paper} style={chatSection}>
         <Grid item xs={12}>
           <Typography
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", margin: '2rem 0rem' }}
             variant='h5'
             className='header-message'>
             Chat
@@ -219,9 +219,7 @@ const Chat = () => {
                             <Grid item xs={12}>
                               <ListItemText
                                 align='right'
-                                secondary={moment(
-                                  item.dateSent
-                                ).fromNow()}></ListItemText>
+                               ></ListItemText>
                             </Grid>
                           </Grid>
                         </ListItem>
@@ -241,9 +239,7 @@ const Chat = () => {
                             <Grid item xs={12}>
                               <ListItemText
                                 align='left'
-                                secondary={moment(
-                                  item.dateSent
-                                ).fromNow()}></ListItemText>
+                                ></ListItemText>
                             </Grid>
                           </Grid>
                         </ListItem>

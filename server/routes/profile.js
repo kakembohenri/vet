@@ -62,7 +62,7 @@ router.get("/:id", auth, async (req, res) => {
       return res.status(200).json({
         result: { ...getFarmerProfile, contact: userContacts.contact },
         schedule: schedule,
-        notifications: newNotifications,
+        notifications: newNotifications.reverse(),
         reviews: [],
         isSuspended: ban
       });
@@ -691,9 +691,9 @@ router.post("/review/vet/:vet_id", auth, async (req, res) => {
       user: current_user,
       avatar: farmer.profile_pic,
       name: [
-        farmer.names.first_name,
-        farmer.names.surname,
-        farmer.names.other_name,
+        farmer.name[0],
+        farmer.name[1],
+        farmer.name[2],
       ],
     };
 
@@ -714,6 +714,7 @@ router.post("/review/vet/:vet_id", auth, async (req, res) => {
 
     res.status(200).json({ msg: "Successfully rated user", id: current_user });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ msg: "Server Error" });
   }
 });
@@ -936,18 +937,30 @@ router.patch("/admin/verify/:id", async (req, res) => {
 // Investigate
 router.get("/fetch/user/reports/:id", async (req, res) => {
   const { id } = req.params;
+  let final_result = []
   try {
     const reports = await Reports.find({ reported: id });
 
     const vet = await VetProfile.findOne({ vet: id });
 
-    return res.status(200).json({
-      result: {
-        reports: reports,
-        name: vet.name,
-      },
-    });
+    for(const report of reports){
+      
+      const farmer = await FarmerProfile.findOne({ farmer: report.reported_by.toString()})
+
+
+      let result = {
+        farmer_pic: farmer.profile_pic,
+          farmer_name: farmer.name,
+          reports: report,
+          name: vet.name
+      }
+
+      final_result.push(result)
+
+    }
+     return res.status(200).json({result: final_result})
   } catch (error) {
+
     return res.status(500).json({ msg: "Server Error" });
   }
 });
@@ -955,17 +968,20 @@ router.get("/fetch/user/reports/:id", async (req, res) => {
 // Get reports
 router.get("/fetch/all-reports", async (req, res) => {
   let ban = null;
+  let final_result = [];
+  let final_result_obj = {}
   try {
     const reports = await Reports.find();
 
-    reports.forEach(async (item) => {
-      const vet = await VetProfile.findOne({ vet: item.reported.toString() });
+    for(const report of reports){
 
+      const vet = await VetProfile.findOne({ vet: report.reported.toString() });
+  
       const count = await Reports.find({
-        reported: item.reported.toString(),
+        reported: report.reported.toString(),
       }).count();
 
-      const isSuspended = await Suspended.findOne({user_id: item.reported.toString()})
+      const isSuspended = await Suspended.findOne({user_id: report.reported.toString()})
 
       if(isSuspended === null){
         ban = false
@@ -973,16 +989,21 @@ router.get("/fetch/all-reports", async (req, res) => {
         ban = true
       }
 
-      return res.status(200).json({
-        result: {
+      let result = {
           vet: vet,
           reports: count,
           isBanned: ban
-        },
-      });
-    });
+      }
+
+      final_result.push(result)
+
+    }
+    
+    // console.log(final_result)
+    return res.status(200).json({ result: final_result })
+
   } catch (error) {
-    return res.status(500).json({ msg: "Server Error" });
+     res.status(500).json({ msg: "Server Error" });
   }
 });
 

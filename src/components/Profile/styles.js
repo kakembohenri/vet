@@ -3,7 +3,7 @@ export const banner = {
   flexDirection: "column",
   // justifyContent: "center",
   alignItems: "center",
-  marginTop: '0.5rem',
+  marginTop: "0.5rem",
   // margin: "4rem 1rem",
   // marginBottom: "0rem",
   // height: "25rem",
@@ -14,15 +14,15 @@ export const detailsContainer = {
   justifyContent: "center",
   padding: "1rem",
   marginTop: "1rem",
-  marginRight: '1rem',
-  flexDirection: 'column',
-  alignItems: 'center',
-  width: '30%',
-  height: '100vh',
+  marginRight: "1rem",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "30%",
+  height: "100vh",
   // position: 'fixed'
 };
 // export const profileDetails = {
-//   height: 
+//   height:
 // }
 
 export const personalContainer = {
@@ -39,7 +39,7 @@ export const bio = {
   display: "flex",
   flexDirection: "column",
   // margin: "2rem",
-  marginTop: '4rem',
+  marginTop: "4rem",
   padding: "1rem",
 };
 
@@ -125,7 +125,6 @@ export const reportContainer = {
   flexDirection: "column",
   justifyContent: "space-around",
   height: "50%",
-
 };
 
 export const editContainer = {
@@ -250,7 +249,7 @@ export const slideRight = {
 
 export const searchBox = {
   display: "flex",
-  flexDirection: 'column',
+  flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
 };
@@ -261,7 +260,7 @@ export const inputSearch = {
 
 export const resultsContainer = {
   position: "absolute",
-  top: "50%",
+  top: "25%",
   left: "0",
   width: "100%",
   display: "flex",

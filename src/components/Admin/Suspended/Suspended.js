@@ -1,5 +1,5 @@
 import NavbarAdmin from "../Navbar/NavbarAdmin";
-import { Typography, Button, Paper, Avatar, Rating } from "@mui/material";
+import { Typography, Button, Paper, Avatar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { unsuspenduser } from "../../../actions/profile";
@@ -11,7 +11,6 @@ const Suspended = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(suspendedUsers)
   return (
     <div>
       <NavbarAdmin />
@@ -48,10 +47,10 @@ const Suspended = () => {
                 </div>
               </div>
               <div>
-                <Typography>
+                {/* <Typography>
                     Suspended: 
                     {moment(item?.createdAt).fromNow()}
-                </Typography>
+                </Typography> */}
                 <Button
                   variant='contained'
                   onClick={() => dispatch(unsuspenduser(item?.user_id, navigate))}

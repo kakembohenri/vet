@@ -18,7 +18,9 @@ export const checkbox = {
 };
 
 export const selection = {
-  width: "25%",
+  display: 'flex',
+  width: "45rem",
+  flexWrap: 'wrap',
   boxShadow: "0rem 0rem 0.1rem 0rem",
   padding: "0.4rem",
   height: "8rem",

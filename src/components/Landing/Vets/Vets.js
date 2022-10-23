@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {LocationOn, Verified, LocalHospital} from "@mui/icons-material"
 
 const Vets = ({ vets }) => {
-    console.log(vets)
   return (
     <div style={{ margin: '2rem 0rem'}} id='vets'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>

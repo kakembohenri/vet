@@ -42,6 +42,7 @@ const Index = () => {
       dispatch(undoschedule(item._id));
     }
   };
+
   return (
     <div>
       <AlertBox />
@@ -51,7 +52,9 @@ const Index = () => {
           Appointments
         </Typography>
         {auth?.schedule && !auth.schedule.length > 0 ? (
-          <Typography>You havent yet created a schedule</Typography>
+          <Typography>
+            You havent yet created a schedule or participated in one
+          </Typography>
         ) : (
           <div className='table-box'>
             <div className='table-row table-head'>
@@ -81,7 +84,7 @@ const Index = () => {
                 </Typography>
               </div>
             </div>
-            {auth.schedule.map((item, index) => (
+            {auth?.schedule?.map((item, index) => (
               <div key={index} style={{ width: "100%" }}>
                 <div className='table-row'>
                   <div className='table-cell first-cell'>
@@ -139,11 +142,9 @@ const Index = () => {
                       Undo
                     </Button>
                   </div>
-                )}  
-                
-                {(
-                  auth?.user?._doc?.vet && (
-                  item?.status === 'pending') &&
+                )}
+
+                {auth?.user?._doc?.vet && item?.status === "pending" && (
                   <div>
                     <Button
                       variant='outlined'

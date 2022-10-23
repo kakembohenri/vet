@@ -18,11 +18,12 @@ export const signupFarmer = (formData) =>
   API.post("/user/signup/farmer", formData);
 
 // Send code
-export const sendCode = (phone_number, code) =>
-  API.post("/user/verification-code/farmer", { phone_number, code });
+export const sendCode = (formData) =>
+  API.post("/user/verification-code/farmer", formData);
 
 // Verify code
-export const verifyCode = (code) => API.post("/user/verify-farmer", { code });
+export const verifyCode = (formData) =>
+  API.post("/user/verify-farmer", formData);
 
 // Verify account by admin
 export const adminVerify = (id) => API.patch(`/profile/admin/verify/${id}`);
@@ -160,7 +161,11 @@ export const suspendUser = (id) => API.post(`/profile/suspend/${id}`);
 export const unsuspendUser = (id) => API.delete(`/profile/unsuspend/${id}`);
 
 // Get suspended users
-export const suspendedUsers = () => API.get('/profile/fetch/suspended/users')
+export const suspendedUsers = () => API.get("/profile/fetch/suspended/users");
 
 // Fetch vets
-export const fetchVets = () => API.get(`/user/fetch/vets`)
+export const fetchVets = () => API.get(`/user/fetch/vets`);
+
+// Fetch services by category
+export const fetchServices = (name) =>
+  API.get(`/user/category/services/${name}`);
