@@ -1,0 +1,22 @@
+.feature-item{
+    transform: scale(1);
+    transition: '0.2s ease in'
+}
+
+.feature-item:hover{
+    transform: scale(1.1);
+}
+
+.not-active{
+    transform: scale(0);
+    transition: 0.2s ease-in;
+    opacity:0;
+
+}
+
+.feature-box{
+    transition: 0.2s ease-in;
+    transform: scale(1);
+    opacity:1
+}
+

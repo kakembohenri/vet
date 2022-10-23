@@ -1,0 +1,15 @@
+Get place details
+
+'X-RapidAPI-Key': 'ed88b22f03mshe53fbe871f5f9bep1e1838jsn5ad24c223992',
+'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com'
+
+Auto complete
+
+'X-RapidAPI-Key': 'ed88b22f03mshe53fbe871f5f9bep1e1838jsn5ad24c223992',
+    'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com'
+
+
+Twilio
+accountSid = AC5acd6beb916fade67a99052c54926340
+authToken = a0ca4f42c1ccea44a30a1045accd4b6c
+phone_number = +18654019064

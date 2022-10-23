@@ -1,0 +1,59 @@
+.legend{
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+    margin-right: 0.3rem;
+    background: deepskyblue;
+}
+
+.glow-pending{
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+    margin-right: 0.3rem;
+    background: orange;
+    animation: glow-pending 2s infinite ease;
+    animation-direction: alternate;
+}
+
+@keyframes glow-pending{
+    100%{
+        background: rgb(252, 227, 181);
+    }
+}
+
+.glow-complete{
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+    margin-right: 0.3rem;
+    background: green;
+    animation: glow-complete 2s infinite ease;
+    animation-direction: alternate;
+}
+
+@keyframes glow-complete{
+    100%{
+        background: lightgreen;
+    }
+}
+
+.glow-cancel{
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+    margin-right: 0.3rem;
+    background: red;
+    animation: glow 2s infinite ease;
+    animation-direction: alternate;
+}
+
+@keyframes glow{
+    100%{
+        background: crimson;
+    }
+}

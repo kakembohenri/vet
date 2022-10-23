@@ -1,0 +1,27 @@
+.notification {
+    position: fixed;
+    top: 0;
+    left: 30%;
+   width:40%;
+    /* background: transparent; */
+    /* display: flex;
+    align-items: center; */
+    transform: translateY(-130%);
+    z-index: 100;
+    animation: slidedown 5s 1s 1 cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes slidedown {
+
+    0%,
+    100% {
+        transform: translateY(-130%);
+        opacity: 0;
+    }
+
+    10%,
+    90% {
+        transform: translateY(180%);
+        opacity: 1;
+    }
+}
