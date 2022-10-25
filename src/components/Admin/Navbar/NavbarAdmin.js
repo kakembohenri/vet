@@ -2,7 +2,6 @@ import { Typography } from "@mui/material";
 import {
   Home,
   AdminPanelSettings,
-  Book,
   CancelOutlined,
   Person,
   LogoutOutlined,
@@ -65,7 +64,11 @@ const NavbarAdmin = () => {
             Vets
           </Link>
         </Typography>
-        <Typography sx={link} variant='body1' component='li' onClick={() => dispatch(suspendedusers())}>
+        <Typography
+          sx={link}
+          variant='body1'
+          component='li'
+          onClick={() => dispatch(suspendedusers())}>
           <Link
             style={{ display: "flex", color: "white", textDecoration: "none" }}
             to='/admin/suspended'>

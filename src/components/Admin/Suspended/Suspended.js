@@ -3,7 +3,6 @@ import { Typography, Button, Paper, Avatar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { unsuspenduser } from "../../../actions/profile";
-import moment from "moment";
 import { header, headerContainer } from "./styles";
 
 const Suspended = () => {
@@ -39,12 +38,12 @@ const Suspended = () => {
                   alignItems: "center",
                 }}>
                 <Avatar src={item?.avatar} />
-                <Typography component='span'>{item?.name?.map((item, index) => (
+                <Typography component='span'>
+                  {item?.name?.map((item, index) => (
                     <span key={index}>{item} </span>
-                ))}</Typography>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                 
-                </div>
+                  ))}
+                </Typography>
+                <div style={{ display: "flex", alignItems: "center" }}></div>
               </div>
               <div>
                 {/* <Typography>
@@ -53,11 +52,11 @@ const Suspended = () => {
                 </Typography> */}
                 <Button
                   variant='contained'
-                  onClick={() => dispatch(unsuspenduser(item?.user_id, navigate))}
-                 >
+                  onClick={() =>
+                    dispatch(unsuspenduser(item?.user_id, navigate))
+                  }>
                   Unsuspend
                 </Button>
-
               </div>
             </Paper>
           ))
