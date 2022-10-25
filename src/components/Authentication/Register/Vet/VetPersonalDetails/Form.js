@@ -18,7 +18,6 @@ import {
   servicesContainer,
   service,
 } from "./styles";
-import axios from "axios";
 import AlertBox from "../../../../Alert/Alert";
 import { createvetprofile } from "../../../../../actions/auth";
 import { setAlert } from "../../../../../actions/alert";
@@ -27,7 +26,6 @@ const Form = () => {
   const [duties, setDuties] = useState([]);
   const [tempLocation, setTempLocation] = useState("");
   const [suggestions, setSuggestions] = useState(null);
-  const [id, setId] = useState("");
   const [location, setLocation] = useState({
     name: "",
     coordinates: {
@@ -67,10 +65,16 @@ const Form = () => {
   const handleSuggestion = (suggestion) => {
     setLocation({
       ...location,
-      name: suggestion.description,
+      name: suggestion.formatted,
     });
-    setTempLocation(suggestion.description);
-    setId(suggestion.place_id);
+    setTempLocation(suggestion.formatted);
+    setLocation((prevState) => ({
+      ...prevState,
+      coordinates: {
+        latitude: suggestion?.lat,
+        longitude: suggestion?.lon,
+      },
+    }));
   };
 
   const onCancel = (duty) => {
@@ -85,26 +89,15 @@ const Form = () => {
   const onChangeLocation = (e) => {
     setTempLocation(e.target.value);
     // Get predictions
-    let options = {
-      method: "GET",
-      url: "https://google-maps28.p.rapidapi.com/maps/api/place/autocomplete/json",
-      params: { input: tempLocation, language: "en" },
-      headers: {
-        "X-RapidAPI-Key": "1ab1a33298msh7dae2c3ac457c29p154917jsn910e5935532f",
-        "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        // console.log(response.data.predictions[0].place_id);
-        // setId(response.data.predictions[0].place_id.toString());
-        setSuggestions(response.data);
+    fetch(
+      `https://api.geoapify.com/v1/geocode/autocomplete?text=${tempLocation}&format=json&apiKey=83575621a5e94a24b36c2d9b0004a8ff`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setSuggestions(result?.results);
       })
-      .catch(function (error) {
-        console.error(error);
-      });
+      .catch((error) => console.log("error", error));
   };
 
   const onChangeNames = (e) => {
@@ -113,43 +106,6 @@ const Form = () => {
       names: { ...formData.names, [e.target.name]: e.target.value },
     });
   };
-
-  useEffect(() => {
-    // Get coordinates of location
-    if (id !== "") {
-      let option = {
-        method: "GET",
-        url: "https://google-maps28.p.rapidapi.com/maps/api/place/details/json",
-        params: {
-          fields:
-            "address_component,adr_address,business_status,formatted_address,geometry,icon,icon_mask_base_uri,icon_background_color,name,permanently_closed,photo,place_id,plus_code,type,url,utc_offset,vicinity,formatted_phone_number,international_phone_number,opening_hours,website,price_level,rating,review,user_ratings_total",
-          place_id: id,
-          language: "en",
-          region: "en",
-        },
-        headers: {
-          "X-RapidAPI-Key":
-            "1ab1a33298msh7dae2c3ac457c29p154917jsn910e5935532f",
-          "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
-        },
-      };
-
-      axios
-        .request(option)
-        .then(function (response) {
-          setLocation((prevState) => ({
-            ...prevState,
-            coordinates: {
-              latitude: response?.data?.result?.geometry?.location?.lat,
-              longitude: response?.data?.result?.geometry?.location?.lng,
-            },
-          }));
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    }
-  }, [id]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -227,10 +183,10 @@ const Form = () => {
                 }}>
                 {suggestions === null ? (
                   <Typography>Loading Results</Typography>
-                ) : !suggestions.predictions.length > 0 ? (
+                ) : !suggestions?.length > 0 ? (
                   <Typography>No suggestions</Typography>
                 ) : (
-                  suggestions.predictions.map((suggestion, index) => (
+                  suggestions?.map((suggestion, index) => (
                     <div key={index}>
                       <div
                         style={{
@@ -248,7 +204,7 @@ const Form = () => {
                           variant='body1'
                           component='span'
                           onClick={() => handleSuggestion(suggestion)}>
-                          {suggestion.description}
+                          {suggestion.formatted}
                         </Typography>
                       </div>
                       <Divider />
